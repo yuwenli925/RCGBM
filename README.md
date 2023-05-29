@@ -5,10 +5,10 @@ The mesh refinement functions uniformrefine.m, uniformrefine3.m and auxiliary st
 
 OGA.m is to construct rational approximation for the fractional power function z^{-s} by the orthogonal greedy algorithm.
 
-FracRBM3.m is the main file about the example of the RCGBM for solving fractional Laplacian on the unit cube.
+FracRBM3.m is the main file about the RCGBM for solving fractional Laplacian on the unit cube.
 
-FracSurface.m is the main file about the example of the RCGBM for solving fractional Laplacian on the unit sphere
+FracRbmSurface.m is the main file about the RCGBM for solving fractional Laplacian on the unit sphere
 
-FracGraphLaplacian.m is the main file about example of the RCGBM for solving fractional Laplacian on a random graph.
+FracGraphLaplacian.m is the main file about the RCGBM for solving fractional Laplacian on a random graph.
 
 
