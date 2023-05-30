@@ -1,6 +1,6 @@
-function [relerr_orig, relerr_sub, err_sub] = main(n, f, num_direction, num_prec, s, use_existing_respol)
+function [relerr_orig, relerr_sub, err_sub] = FracRbmGraph(n, f, num_direction, num_prec, s, use_existing_respol)
 %
-% This is the main function of the first experiment.
+% This is the main function of the last experiment.
 %
 % Input:
 %
