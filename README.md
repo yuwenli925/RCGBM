@@ -9,6 +9,6 @@ FracRBM3.m is the main file about the RCGBM for solving fractional Laplacian on 
 
 FracRbmSurface.m is the main file about the RCGBM for solving fractional Laplacian on the unit sphere
 
-FracGraphLaplacian.m is the main file about the RCGBM for solving fractional Laplacian on a random graph.
+FracRbmGraph.m is the main file about the RCGBM for solving fractional Laplacian on a random graph.
 
 
