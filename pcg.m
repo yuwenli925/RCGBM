@@ -40,7 +40,7 @@ x = x0;
 if nargin < 5 || isempty(B)  % if B is not supplied, use CG method
     z = r;
 else
-    if n > 2^10
+    if n > 2^13
         option = struct('tol',1e-10,'printlevel',0);
         z = amg(B, r, option);  % for large systems, use algebraic multigrid
     else
@@ -66,7 +66,7 @@ for k = 1:iters - 1
     if nargin < 5 || isempty(B)
         z = r;
     else
-        if n > 2^10
+        if n > 2^13
             z = amg(B, r, option);
         else
             z = B \ r;

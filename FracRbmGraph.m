@@ -42,10 +42,10 @@ function [relerr_orig, relerr_sub, err_sub] = FracRbmGraph(n, f, num_direction, 
 
     % Generate graph and define matrices
     rng(100); % We use this seed in the experiment.
-    L = generate_graph(n); 
+    L = generate_graph(n);
     I = speye(n);
     A = L + (1 / n) * I;
-    A = A / norm(A, inf); 
+    A = A / norm(A, inf);
 
     % If input vector f is not provided, generate random vector
     if nargin < 2 || isempty(f)
@@ -57,9 +57,14 @@ function [relerr_orig, relerr_sub, err_sub] = FracRbmGraph(n, f, num_direction, 
     x0 = sparse(nf, 1);
     B = A;
 
-    % Perform preconditioning if required
+    global P_all;
     if nargin < 4 || (num_prec == 1)
-        [~, P] = pcg(A + I, f, 1e-12, num_direction, B, x0);
+        if (~exist('P_all','var') || isempty(P_all) )
+            [~, P] = pcg(A + I, f, 1e-12, num_direction, B, x0);
+            P_all = P;
+        else
+            P = P_all(:,1:num_direction);
+        end
     else
         pol_ = sort(pol);
         A_max = A + pol_(end) * I;
@@ -83,16 +88,22 @@ function [relerr_orig, relerr_sub, err_sub] = FracRbmGraph(n, f, num_direction, 
     
     % Set options for AMG
     option = struct('tol', 1e-10, 'printlevel', 0);
-
+    
+    global uk_exact_all;
     % Loop over poles
     for k = 1:npol
         A_k = A + pol(k) * I;
-
-        % Use AMG for large systems, otherwise solve directly
-        if n > 2^10
-            uk_exact = amg(A_k, f, option);
+        
+        if ~exist('uk_exact_all','var') || size(uk_exact_all,2) < k 
+            % Use AMG for large systems, otherwise solve directly
+            if n > 2^13
+                uk_exact = amg(A_k, f, option);
+            else
+                uk_exact = A_k \ f;
+            end
+            uk_exact_all(:,k) = uk_exact;
         else
-            uk_exact = A_k \ f;
+            uk_exact = uk_exact_all(:,k);
         end
 
         % Compute approximated solution

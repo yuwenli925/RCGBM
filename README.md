@@ -11,4 +11,5 @@ FracRbmSurface.m is the main file about the RCGBM for solving fractional Laplaci
 
 FracRbmGraph.m is the main file about the RCGBM for solving fractional Laplacian on a random graph.
 
+run_FracRbmGraph.m is the script for running the FracRbmGraph.m.
 
